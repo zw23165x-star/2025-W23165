@@ -1,0 +1,48 @@
+@startuml
+left to right direction
+
+' アクターの定義
+actor "学生" as Student
+actor "教員" as Teacher
+
+package "OTM_system (学務・学習支援システム)" {
+
+    package "el-Campus" {
+        usecase "アンケートに回答" as EL_Enquete
+        usecase "課題をダウンロード" as EL_Download
+        usecase "掲示板を見る" as EL_BBS
+        usecase "試験を受ける" as EL_Exam
+        usecase "コンテンツ視聴" as EL_Watch
+        usecase "お知らせを見る" as EL_Notice
+    }
+
+    package "UNIVERSAL PASSPORT" {
+        usecase "シラバス参照" as UN_Syllabus
+        usecase "履修登録" as UN_Register
+        usecase "成績照会" as UN_Grades
+        usecase "時間割確認" as UN_Schedule
+        usecase "資格希望" as UN_License
+    }
+}
+
+' 学生との関係（すべての機能を利用可能として定義）
+Student --> EL_Enquete
+Student --> EL_Download
+Student --> EL_BBS
+Student --> EL_Exam
+Student --> EL_Watch
+Student --> EL_Notice
+
+Student --> UN_Syllabus
+Student --> UN_Register
+Student --> UN_Grades
+Student --> UN_Schedule
+Student --> UN_License
+
+' 教員との関係（管理側として関係しそうなものを定義）
+Teacher --> EL_BBS
+Teacher --> EL_Notice
+Teacher --> UN_Syllabus
+Teacher --> UN_Schedule
+
+@enduml
